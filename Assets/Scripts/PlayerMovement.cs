@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private float InputDirection;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     [SerializeField] private float playerMoveSpeed;
     [SerializeField] private float jumpPower;
 
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,17 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+
+        if(!GroundCheck.isGrounded)
+        {
+            animator.SetBool("Jump",true);
+            animator.SetBool("Run",false);
+        }
+        
+        if(GroundCheck.isGrounded)
+        {
+            animator.SetBool("Jump",false);
+        }
     }
 
     private void CheckInput()
@@ -52,6 +65,14 @@ public class PlayerMovement : MonoBehaviour
     private void Movement()
     {
         rb.velocity = new Vector2(playerMoveSpeed*InputDirection,rb.velocity.y);
+        if(rb.velocity.x != 0)
+        {
+            animator.SetBool("Run",true);
+        }
+        else
+        {
+            animator.SetBool("Run",false);
+        }
     }
     
 }
