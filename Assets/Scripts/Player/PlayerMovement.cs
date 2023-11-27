@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //a
+    
     private float InputDirection;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
