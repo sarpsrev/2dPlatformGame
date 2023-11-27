@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TrapDmage : MonoBehaviour
 {
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if(other.transform.CompareTag("Player"))
+        if(collision.transform.CompareTag("Player"))
         {
-            Debug.Log("here");
+            Destroy(collision.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
         }
         
     }
