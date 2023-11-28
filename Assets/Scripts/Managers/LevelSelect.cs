@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSelect : MonoBehaviour
 {
@@ -14,5 +15,16 @@ public class LevelSelect : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void getLevelIndex()
+    {
+        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentLevelIndex>= PlayerPrefs.GetInt("CurrentLevel"))
+        {
+            PlayerPrefs.SetInt("CurrentLevel",currentLevelIndex+1);
+            
+        }
     }
 }

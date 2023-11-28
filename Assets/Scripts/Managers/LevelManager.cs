@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     
     public static LevelManager Instance;
 
+    LevelSelect levelSelect;
+
     private void Awake() 
     {
         Instance = this;
@@ -15,6 +17,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelSelect = GetComponent<LevelSelect>();
         
     }
 
@@ -26,9 +29,11 @@ public class LevelManager : MonoBehaviour
 
     public void LevelClear()
     {
-        if(transform.childCount==1 && SceneManager.GetActiveScene().buildIndex<=2)
+        if(transform.childCount==1)
         {
-           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+           
+           levelSelect.getLevelIndex();
+           SceneManager.LoadScene(0);
         }
     }
 }
