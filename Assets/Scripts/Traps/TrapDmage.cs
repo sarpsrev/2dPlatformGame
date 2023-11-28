@@ -10,7 +10,6 @@ public class TrapDmage : MonoBehaviour
         if(collision.transform.CompareTag("Player"))
         {
             collision.transform.GetComponent<PlayerRespawn>().playerHasDamage();
-           Debug.Log("here");
 
         }
         

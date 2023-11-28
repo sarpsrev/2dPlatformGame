@@ -9,8 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private bool canDoubleJump;
+
     [SerializeField] private float playerMoveSpeed;
     [SerializeField] private float jumpPower;
+
+    public float doubleJumpPower =2f;
+
 
 
     // Start is called before the first frame update
@@ -40,6 +45,17 @@ public class PlayerMovement : MonoBehaviour
         if(GroundCheck.isGrounded)
         {
             animator.SetBool("Jump",false);
+            animator.SetBool("DoubleJump",false);
+            animator.SetBool("Fall",false);
+        }
+
+        if (rb.velocity.y<0)
+        {
+            animator.SetBool("Fall",true);
+        }
+        else if (rb.velocity.y>0)
+        {
+            animator.SetBool("Fall",false);
         }
     }
 
@@ -56,9 +72,24 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = true;
        }
 
-       if(Input.GetButtonDown("Jump") && GroundCheck.isGrounded)
+       if(Input.GetButtonDown("Jump"))
        {
-            rb.velocity = new Vector2(rb.velocity.x,jumpPower);
+            if (GroundCheck.isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x,jumpPower);
+                canDoubleJump=true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (canDoubleJump)
+                {
+                    canDoubleJump=false;
+                    rb.velocity = new Vector2(rb.velocity.x,doubleJumpPower);
+                    animator.SetBool("DoubleJump",true);
+                }
+                
+            }
+            
        }
     }
 
