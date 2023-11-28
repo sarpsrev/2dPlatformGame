@@ -16246,6 +16246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMoveSpeed: 2
   jumpPower: 5
+  doubleJumpPower: 4
 --- !u!95 &426117701
 Animator:
   serializedVersion: 5
