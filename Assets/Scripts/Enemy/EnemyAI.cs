@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         stopTime = startWaitingTime;
     }
 
@@ -57,10 +58,16 @@ public class EnemyAI : MonoBehaviour
         if(transform.position.x>currentPos.x)
         {
             spriteRenderer.flipX = true;
+            animator.SetBool("Idle",false);
         }
         else if(transform.position.x<currentPos.x)
         {
             spriteRenderer.flipX = false;
+            animator.SetBool("Idle",false);
+        }
+        else if (transform.position.x==currentPos.x)
+        {
+            animator.SetBool("Idle",true);
         }
 
     }
