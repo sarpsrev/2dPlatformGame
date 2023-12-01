@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
         {
            
            levelSelect.getLevelIndex();
-           SceneManager.LoadScene(0);
+           SceneManager.LoadScene("LevelSelection");
         }
     }
 }
